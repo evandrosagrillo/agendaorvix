@@ -19,8 +19,10 @@ object Util {
         try { ctx.packageManager.getPackageInfo(pkg, 0); true } catch (e: Exception) { false }
 
     /** Abre direto a conversa no WhatsApp Business (ou WhatsApp comum se não houver). */
-    fun whatsappIntent(ctx: Context, phone: String): Intent {
-        val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/" + normalizePhone(phone)))
+        fun whatsappIntent(ctx: Context, phone: String, text: String = ""): Intent {
+        val url = "https://wa.me/" + normalizePhone(phone) +
+            if (text.isNotBlank()) "?text=" + Uri.encode(text) else ""
+        val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         listOf("com.whatsapp.w4b", "com.whatsapp").firstOrNull { installed(ctx, it) }?.let { i.setPackage(it) }
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return i
