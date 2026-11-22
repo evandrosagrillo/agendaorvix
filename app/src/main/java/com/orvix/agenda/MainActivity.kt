@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             row.root.alpha = if (a.time < now) 0.55f else 1f
             if (a.phone.isBlank()) row.btnWhats.visibility = View.GONE
             row.btnWhats.setOnClickListener {
-                try { startActivity(Util.whatsappIntent(this, a.phone)) }
+                try { startActivity(Util.whatsappIntent(this, a.phone, a.summary)) }
                 catch (e: Exception) { toast("WhatsApp não encontrado") }
             }
             row.btnDelete.setOnClickListener {
