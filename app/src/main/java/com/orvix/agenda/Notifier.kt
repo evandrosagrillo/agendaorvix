@@ -34,7 +34,7 @@ object Notifier {
         ensureChannel(ctx)
         val nm = ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val click: Intent = if (a.phone.isNotBlank()) Util.whatsappIntent(ctx, a.phone)
+        val click: Intent = if (a.phone.isNotBlank()) Util.whatsappIntent(ctx, a.phone, a.summary)
         else Intent(ctx, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pi = PendingIntent.getActivity(ctx, a.id, click, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
